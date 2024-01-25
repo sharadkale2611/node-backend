@@ -1,0 +1,19 @@
+{
+  "name": "proj1",
+  "version": "1.0.0",
+  "description": "node backend practice",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [
+    "node",
+    "js"
+  ],
+  "author": "sharad",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
+}
