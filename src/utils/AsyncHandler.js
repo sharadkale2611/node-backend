@@ -1,16 +1,12 @@
-const AsyncHandler = (fn) => {
-    (req, res, next) => {
+const asyncHandler = (fn) => {
+    return (req, res, next) => {
         Promise.resolve(fn(req, res, next))
                .catch((error)=>next(error))               //catch or reject
     }
 }
 
 
-
-
-
-
-export {AsyncHandler}
+export {asyncHandler}
 
 /* 
  /// Older Style  using try catch
