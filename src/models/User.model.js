@@ -1,5 +1,5 @@
 import mongoose, {Schema} from "mongoose";
-import { Jwt } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 // const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -61,11 +61,12 @@ UserSchema.pre("save", async function(next){
 })
 
 UserSchema.methods.isPasswordCorrect = async function(password){
-    return await bcrypt.compare(password,ths.password)
+    return await bcrypt.compare(password,this.password)
 }
 
 UserSchema.methods.generateAccessToken = function(){
-    return jwt.sigin(
+    
+    return jwt.sign(
         {
             _id:this._id,
             email:this.email,
@@ -80,11 +81,11 @@ UserSchema.methods.generateAccessToken = function(){
 }
 
 UserSchema.methods.generateRefreshToken = function(){
-    return jwt.sigin(
+    return jwt.sign(
         {
             _id:this._id
         },
-        process.env.REFRESH_TOKEN_SERCRETE,
+        process.env.REFRESH_TOKEN_SECRETE,
         {
             expiresIn:process.env.REFRESH_TOKEN_EXPIRY
         }
